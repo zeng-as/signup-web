@@ -1,0 +1,37 @@
+<!--pages/viewInfo/viewInfo.wxml-->
+<view class="page">
+  <view class="page__hd">
+    <view class="page__title">第六届靶区勾画学习班</view>
+    <view class="page__desc">
+      <view class="weui-article__ol">
+        <view class="weui-article__li">联系人及联系方式
+          <view class="weui-article__ul">
+            <view class="weui-article__li">
+              雷玲医生:电话/微信 18588535764
+            </view>
+            <view class="weui-article__li">
+              何萌医生:微信 82343436
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="page__bd">
+    <view class="weui-panel weui-panel_access">
+      <mp-searchbar placeholder="请输入手机号码" focus="true" cancel="false"></mp-searchbar>
+      <view class="weui-panel__hd">已报名学习班</view>
+        <view class="weui-panel__bd">
+          <navigator aria-labelledby="js_p1m1_bd" class="weui-media-box weui-media-box_appmsg" url="javascript:">
+            <view aria-hidden="true" class="weui-media-box__hd">
+              <image class="weui-media-box__thumb" src="https://www.baidu.com/img/flexible/logo/pc/result.png" alt></image>
+            </view>
+            <view aria-hidden="true" id="js_p1m1_bd" class="weui-media-box__bd">
+              <text class="weui-media-box__title">第1期</text>
+              <view class="weui-media-box__desc">鼻咽癌及头颈部鳞癌</view>
+            </view>
+          </navigator>
+        </view>
+    </view>
+  </view>
+</view>

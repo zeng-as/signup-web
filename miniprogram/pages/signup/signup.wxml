@@ -1,0 +1,107 @@
+<!--pages/signup.wxml-->
+<view class="page">
+  <view class="page__hd">
+    <view class="page__title">第六届靶区勾画学习班</view>
+    <view class="page__desc">
+      <view class="weui-article__ol">
+        <view class="weui-article__li">上课方式：<text class="text_weight">全程线下</text>，线下地点：中国医学科学院肿瘤医院深圳医院改扩建一期二楼远程会诊中心（群聊详细说明）；</view>
+        <view class="weui-article__li">费用：<text class="text_weight">1000元/期</text>（住宿、餐饮自行解决）</view>
+        <view class="weui-article__li">缴费方式采用<text class="text_weight">银行转账形式</text>，具体如下：
+          <view class="weui-article__ul">
+            <view class="weui-article__li">
+              户名：深圳市医师协会
+            </view>
+            <view class="weui-article__li">
+              开户银行：招商银行深圳分行营业部
+            </view>
+            <view class="weui-article__li">
+              银行账号(可点击复制)：<text class="page__desc-cardno" bindtap="copyCardno">755 918 767 710 901</text>
+            </view>
+          </view>
+          <text class="text_weight">注意不可以支付宝、微信支付，支持手机银行app转账</text>
+        </view>
+        <view class="weui-article__li">每期群内发票相关信息填写链接，<text class="text_weight">发票将在第六届所有期培训班结束后再寄出，注意期间不能因为个人原因要求退费！！！</text></view>
+        <view class="weui-article__li">缴费成功后上传转账凭证才能报名成功</view>
+        <view class="weui-article__li">每期学员名额限制在30名以下，若下面勾选项目中没有相应的期别可以选择，则该期已报满！！！</view>
+        <view class="weui-article__li">报名成功后跳转处有相应期别的企业微信二维码，注意扫码入群即可！！！若未出现跳转页面，可在报名界面查询报名期别，下方有相应期别的企业微信二维码！！！</view>
+      </view>
+    </view>
+  </view>
+  <view class="page__bd">
+    <mp-toptips msg="{{errorMsg}}" type="error" show="{{errorMsg}}"></mp-toptips>
+    <mp-form-page>
+      <mp-form id="form" rules="{{formRules}}" models="{{form}}">
+        <view class="weui-form__control-area">
+          <view class="weui-cells__group weui-cells__group_form">
+            <view class="weui-cells__title">报名信息</view>
+            <view class="weui-cells">
+              <view class="weui-cell weui-cell_active">
+                <view class="weui-cell__hd">
+                <label class="weui-label">姓名</label></view>
+                <view class="weui-cell__bd">
+                  <input bindinput="formInputChange" data-field="name" class="weui-input" placeholder="填写本人姓名" placeholder-class="weui-input__placeholder" value="{{form.name}}"/>
+                </view>
+              </view>
+              <view class="weui-cell weui-cell_active">
+                <view class="weui-cell__hd">
+                  <label class="weui-label">单位</label>
+                </view>
+                <view class="weui-cell__bd">
+                  <input bindinput="formInputChange" data-field="organization" class="weui-input" placeholder="填写本人单位名称" placeholder-class="weui-input__placeholder" value="{{form.organization}}"/>
+                </view>
+              </view>
+              <view class="weui-cell weui-cell_active">
+                <view class="weui-cell__hd">
+                  <label class="weui-label">职称</label>
+                </view>
+                <view class="weui-cell__bd">
+                  <input bindinput="formInputChange" data-field="post" class="weui-input" placeholder="填写本人职称" placeholder-class="weui-input__placeholder" value="{{form.post}}"/>
+                </view>
+              </view>
+              <view class="weui-cell weui-cell_active">
+                <view class="weui-cell__hd">
+                  <label class="weui-label">手机号码</label>
+                </view>
+                <view class="weui-cell__bd">
+                  <input bindinput="formInputChange" data-field="mobile" class="weui-input" placeholder="填写本人手机号码"  type="number" placeholder-class="weui-input__placeholder" value="{{form.mobile}}"/>
+                </view>
+              </view>
+              <view class="weui-cell weui-cell_active">
+                <view class="weui-cell__hd">
+                  <label class="weui-label">所在地</label>
+                </view>
+                <view class="weui-cell__bd">
+                  <input bindinput="formInputChange" data-field="area" class="weui-input" placeholder="示例：广东省深圳市龙岗区" placeholder-class="weui-input__placeholder" value="{{form.area}}"/>
+                </view>
+              </view>
+              <view class="weui-cell weui-cell_active">
+                <view class="weui-cell__hd">
+                  <label class="weui-label">邮箱</label>
+                </view>
+                <view class="weui-cell__bd">
+                  <input bindinput="formInputChange" data-field="email" class="weui-input" placeholder="填写本人邮箱" placeholder-class="weui-input__placeholder" value="{{form.email}}"/>
+                </view>
+              </view>
+              <view class="weui-cell weui-cell_active">
+                <view class="weui-cell__hd">
+                  <label class="weui-label">选项</label>
+                </view>
+              </view>
+              <mp-cells>
+                  <mp-checkbox-group prop="classes" multi="{{true}}" bindchange="classesChange">
+                    <mp-checkbox wx:for="{{classesItems}}" wx:key="value" label="{{item.name}}" value="{{item.value}}" checked="{{item.checked}}" aria-disabled="{{item.disabled}}"></mp-checkbox>
+                  </mp-checkbox-group>
+              </mp-cells>
+              <view class="weui-cell weui-cell_active">
+                <mp-uploader title="上传缴费凭证" tips="" max-size="20*1024*1024" max-count="5" files="{{form.files}}"></mp-uploader>
+              </view>
+            </view>
+          </view>
+        </view>
+      </mp-form>
+      <view slot="button">
+          <button class="weui-btn" type="primary" bindtap="submitForm">提交</button>
+      </view>
+    </mp-form-page>
+  </view>
+</view>

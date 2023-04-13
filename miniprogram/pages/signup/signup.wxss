@@ -1,0 +1,19 @@
+/* pages/signup.wxss */
+.weui-article__ul {margin: 0;}
+.weui-article__li {margin: 0;}
+.weui-form__control-area {margin: 0;}
+.weui-form {padding: 25px 0 0;}
+.weui-input__placeholder {font-size: small;}
+.weui-label::before {
+  content: '*';color: red;
+}
+.weui-uploader__title::before {
+  content: '*';color: red;
+}
+.weui-cells__title {
+  padding: 0;
+}
+.text_weight {
+  font-weight: 700;
+  font-size: 15px;
+}
