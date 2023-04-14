@@ -18,7 +18,7 @@
 }
 .text_weight {
   font-weight: 700;
-  font-size: 15px;
+  font-size: 14px;
   color: black;
 }
 .font_blue {
