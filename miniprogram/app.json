@@ -3,7 +3,8 @@
     "pages/index/index",
     "pages/logs/logs",
     "pages/signup/signup",
-    "pages/viewInfo/viewInfo"
+    "pages/viewInfo/viewInfo",
+    "pages/protocol/protocol"
   ],
   "window": {
     "backgroundTextStyle": "light",

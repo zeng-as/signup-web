@@ -1,7 +1,10 @@
 /* pages/signup.wxss */
+.weui-cells {
+  margin-top: 0px;
+}
 .weui-article__ul {margin: 0;}
 .weui-article__li {margin: 0;}
-.weui-form__control-area {margin: 0;}
+.weui-form__control-area {margin-top: 0;}
 .weui-form {padding: 25px 0 0;}
 .weui-input__placeholder {font-size: small;}
 .weui-label::before {
@@ -16,4 +19,11 @@
 .text_weight {
   font-weight: 700;
   font-size: 15px;
+  color: black;
+}
+.font_blue {
+  color: rgb(0, 122, 192);
+}
+.font_red {
+  color: red
 }

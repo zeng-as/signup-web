@@ -6,14 +6,14 @@ Page({
    */
   data: {
     form: {
-      name: '曾小水',
-      organization: '测试单位',
-      post: '职称123',
-      mobile: '15712341234',
-      area: '广东省深圳市',
-      email: 'asd@qq.com',
+      name: '',
+      organization: '',
+      post: '',
+      mobile: '',
+      area: '',
+      email: '',
       classes: null,
-      files: null,
+      fileIds: [],
     },
     formRules: [
       {name:"name",rules:{required:true,message:'请填写姓名'}},
@@ -23,25 +23,28 @@ Page({
       {name:"area",rules:{required:true,message:'请填写所在地'}},
       {name:"email",rules:[{required:true,message:'请填写邮箱'},{email:true,message:'邮箱格式不正确'}]},
       {name:"classes",rules:{minlength:1,message:'请选择学习班'}},
-      {name:"files",rules:{minlength:1,message:'请上传报名凭证'}}
+      {name:"fileIds",rules:{minlength:1,message:'请上传缴费凭证'}}
     ],
     errorMsg: '',
     classesItems: [
-      {name: '第1期', value: '1', checked:false},
-      {name: '第2期', value: '2', checked:false},
-      {name: '第3期', value: '3', checked:false},
-      {name: '第4期', value: '4', checked:false},
-      {name: '第5期', value: '5', checked:false}
+      {name: '第1期', value: '7', checked:false}
     ],
+    files: [],
+    isAgree: false,
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad() {
     var that = this
+    this.setData({
+      selectFile: this.selectFile.bind(this),
+      uplaodFile: this.uplaodFile.bind(this)
+    })
+
     // 获取学习班信息
     wx.request({
-      url: 'http://localhost:10086/getRemainPlaces',
+      url: 'https://www.szmyxdi.com/signup/getValidClasses/6',
       method: 'GET',
       success: function(data) {
         console.log(data)
@@ -49,7 +52,7 @@ Page({
         if (data.data.code === '200') {
           for (let i = 0; i < data.data.data.length; i++) {
             const ele = data.data.data[i];
-            classesItems[i].name = '['+ ele.currentNum + '/' + ele.maxNum + '] ' + ele.name 
+            classesItems[i] = {'name': '['+ ele.currentNum + '/' + ele.maxNum + '] ' + ele.name, 'value': ele.id, 'checked': false};
           }
           that.setData({
             classesItems: classesItems
@@ -106,7 +109,7 @@ Page({
   copyCardno() {
     wx.setClipboardData({
       data: '755918767710901',
-      success: function (res) {
+      success: function () {
         wx.getClipboardData({
           success: function (res) {
             console.log(res.data) // data
@@ -117,8 +120,16 @@ Page({
   },
   submitForm() {
     console.log(this.data.form)
-    this.selectComponent('#form').validate((valid, errors) => {
+    const that = this
+    this.selectComponent('#form').validate((valid: boolean, errors: { message: string; rule: {}; name: string }[]) => {
+      console.log(that.data.isAgree)
+        if (!that.data.isAgree) {
+          valid = false;
+          errors = errors ? errors : []
+          errors.push({message: "请阅读并同意隐私协议", rule: {}, name:"isAgree"})
+        }
         console.log('valid', valid, errors)
+
         if (!valid) {
             const firstError = Object.keys(errors)
             if (firstError.length) {
@@ -127,9 +138,27 @@ Page({
                 })
             }
         } else {
-            wx.showToast({
-                title: '校验通过'
-            })
+          wx.request({
+            url: 'https://www.szmyxdi.com/signup/signup',
+            header: {
+              'Content-Type': 'application/json'
+            },
+            method: 'POST',
+            data: this.data.form,
+            success: function(data) {
+              console.log(data)
+              if (data.data.code === '200') {
+                wx.showToast({
+                  title: '报名成功'
+                })
+                setTimeout(() => {
+                  wx.navigateTo({url: '../viewInfo/viewInfo?mobile=' + that.data.form.mobile})
+                }, 1000)
+              } else {
+                wx.showToast({title: data.data.desc, icon: 'none'})
+              }
+            }
+          })
         }
     })
   },
@@ -139,7 +168,7 @@ Page({
       [`form.${field}`]: e.detail.value
     })
   },
-  classesChange: function (e) {
+  classesChange: function (e: { detail: { value: any } }) {
     console.log('checkbox发生change事件，携带value值为：', e.detail.value);
 
     var classesItems = this.data.classesItems, values = e.detail.value;
@@ -158,5 +187,53 @@ Page({
       classesItems: classesItems,
       [`form.classes`]: e.detail.value
     });
+  },
+  selectFile(files: any) {
+    console.log('files', files)
+    // 返回false可以阻止某次文件上传
+  },
+  uplaodFile(files: { tempFilePaths: any[] }) {
+    console.log('upload files', files)
+    const that = this
+    var tempUrls = new Array
+    // 文件上传的函数，返回一个promise
+    return new Promise((resolve) => {
+      files.tempFilePaths.forEach(tempFilePaths => {
+        wx.uploadFile({
+          url: 'https://www.szmyxdi.com/signup/fileUpload',
+          filePath: tempFilePaths,
+          name: 'files[]',
+          success(res) { //上传成功
+              var data = (JSON.parse(res.data)).data;
+              //成功调用接口
+              //格式必须是resolve({ urls: [data] })
+              var fileIds = that.data.form.fileIds.concat(data.id);
+              that.setData({
+                [`form.fileIds`]: fileIds
+              });
+              tempUrls.push(data.url)
+              if (tempUrls.length == files.tempFilePaths.length) {
+                resolve({urls: tempUrls})
+              }
+          }
+        })
+      });
+    })
+  },
+  uploadError(e: { detail: any }) {
+    console.log('upload error', e.detail)
+  },
+  uploadSuccess(e: { detail: any }) {
+    console.log('upload success', e.detail)
+  },
+  delimg(e: { detail: { item: any; index: number } }) {
+    console.log(e)
+    this.data.files.splice(this.data.files.findIndex(item => item == e.detail.item), 1)
+    this.data.form.fileIds.splice(e.detail.index, 1)
+  },
+  bindAgreeChange(e: { detail: { value: string | any[] } }) {
+    this.setData({
+      isAgree: !!e.detail.value.length
+    })
   },
 })
