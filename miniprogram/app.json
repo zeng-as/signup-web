@@ -4,7 +4,8 @@
     "pages/logs/logs",
     "pages/signup/signup",
     "pages/viewInfo/viewInfo",
-    "pages/protocol/protocol"
+    "pages/protocol/protocol",
+    "pages/tips/tips"
   ],
   "window": {
     "backgroundTextStyle": "light",

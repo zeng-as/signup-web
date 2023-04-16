@@ -47,7 +47,7 @@ Page({
     })
   },
   singup() {
-    wx.navigateTo({url: '../signup/signup'})
+    wx.navigateTo({url: '../tips/tips'})
   },
   viewInfo() {
     wx.navigateTo({url: '../viewInfo/viewInfo'})

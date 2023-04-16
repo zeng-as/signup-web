@@ -1,0 +1,43 @@
+<!--pages/tips/tips.wxml-->
+<view class="page">
+  <view class="page__hd">
+    <view class="page__title">报名前须知</view>
+    <view class="page__desc">
+      <view class="weui-article__ol">
+        <view class="weui-article__li">上课方式：全程线下，线下地点：中国医学科学院肿瘤医院深圳医院改扩建一期二楼远程会诊中心（群聊详细说明）；</view>
+        <view class="weui-article__li">费用：1000元/期（住宿、餐饮自行解决）</view>
+        <view class="weui-article__li">缴费方式采用银行转账形式，具体如下：
+          <view class="weui-article__ul">
+            <view class="weui-article__li">
+              户名：深圳市医师协会
+            </view>
+            <view class="weui-article__li">
+              开户银行：招商银行深圳分行营业部
+            </view>
+            <view class="weui-article__li">
+              银行账号(可点击复制)：<text class="page__desc-cardno" bindtap="copyCardno">755 918 767 710 901</text>
+            </view>
+          </view>
+          <text class="text_weight">注意不可以支付宝、微信支付，支持手机银行app转账</text>
+        </view>
+        <view class="weui-article__li">每期群内发票相关信息填写链接，发票将在第六届所有期培训班结束后再寄出，注意期间不能因为个人原因要求退费！！！</view>
+        <view class="weui-article__li">缴费成功后上传转账凭证才能报名成功</view>
+        <view class="weui-article__li">每期学员名额限制在30名以下，<text class="text_weight">若下面报名界面勾选项目中没有相应的期别可以选择，则该期已报满！！！</text><text class="text_weight font_red">请一定在确认有名额的情况下再缴费，</text><text class="text_weight">缴费后发现没有相应的期别将不予退费，可延至下一届</text></view>
+        <view class="weui-article__li"><text class="text_weight font_red">报名成功后跳转处有相应期别的企业微信二维码，注意扫码入群即可！！！若未出现跳转页面，可在报名界面查询报名期别，下方有相应期别的企业微信二维码！！！</text></view>
+      </view>
+    </view>
+    <view class="page__ft" style="padding-top: 0px;">
+      <checkbox-group slot="tips" bindchange="bindAgreeChange">
+        <label class="weui-agree">
+          <checkbox class="weui-agree__checkbox-check" />
+          <text class="weui-agree__checkbox"></text>
+          <view class="weui-agree__text">已阅读并同意《报名前须知》</view>
+        </label>
+      </checkbox-group>
+      <view slot="button" style="margin-top: 24px;">
+        <button class="weui-btn" type="primary" bindtap="submit" disabled="{{isDisabled}}">{{buttonName}}</button>
+      </view>
+    </view>
+  </view>
+
+</view>

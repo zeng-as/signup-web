@@ -1,35 +1,8 @@
 <!--pages/signup.wxml-->
 <view class="page">
-  <view class="page__hd">
-    <view class="page__title">第六届靶区勾画学习班</view>
-    <view class="page__desc">
-      <view class="weui-article__ol">
-        <view class="weui-article__li">上课方式：<text class="text_weight">全程线下</text>，线下地点：中国医学科学院肿瘤医院深圳医院改扩建一期二楼远程会诊中心（群聊详细说明）；</view>
-        <view class="weui-article__li">费用：<text class="text_weight">1000元/期</text>（住宿、餐饮自行解决）</view>
-        <view class="weui-article__li">缴费方式采用<text class="text_weight">银行转账形式</text>，具体如下：
-          <view class="weui-article__ul">
-            <view class="weui-article__li">
-              户名：深圳市医师协会
-            </view>
-            <view class="weui-article__li">
-              开户银行：招商银行深圳分行营业部
-            </view>
-            <view class="weui-article__li">
-              银行账号(可点击复制)：<text class="page__desc-cardno text_weight" bindtap="copyCardno">755 918 767 710 901</text>
-            </view>
-          </view>
-          <text class="text_weight font_blue">注意不可以支付宝、微信支付，支持手机银行app转账</text>
-        </view>
-        <view class="weui-article__li">每期群内发票相关信息填写链接，<text class="text_weight font_blue">发票将在第六届所有期培训班结束后再寄出，注意期间不能因为个人原因要求退费！！！</text></view>
-        <view class="weui-article__li"><text class="text_weight">缴费成功后上传转账凭证才能报名成功</text></view>
-        <view class="weui-article__li"><text class="text_weight">每期学员名额限制在30名以下，</text><text class="text_weight font_blue">若下面勾选项目中没有相应的期别可以选择，则该期已报满！！！</text></view>
-        <view class="weui-article__li"><text class="text_weight font_red">报名成功后跳转处有相应期别的企业微信二维码，注意扫码入群即可！！！若未出现跳转页面，可在报名界面查询报名期别，下方有相应期别的企业微信二维码！！！</text></view>
-      </view>
-    </view>
-  </view>
   <view class="page__bd">
     <mp-toptips msg="{{errorMsg}}" type="error" show="{{errorMsg}}"></mp-toptips>
-    <mp-form-page>
+    <mp-form-page title="第六届靶区勾画学习班">
       <mp-form id="form" rules="{{formRules}}" models="{{form}}">
         <mp-cells title="报名信息">
           <mp-cell prop="name" title="姓名" ext-class="">
@@ -63,6 +36,7 @@
         </mp-cells>
         <mp-cells title="报名第几期靶区勾画学习班（每期详细内容请看放疗微达人报名招募链接）">
           <mp-cell title="选项" ext-class="">
+            <button slot="footer" type="default" class="weui-vcode-btn" bindtap="refresh">刷新期别</button>
           </mp-cell>
         </mp-cells>   
         <mp-cells>

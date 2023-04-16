@@ -236,4 +236,24 @@ Page({
       isAgree: !!e.detail.value.length
     })
   },
+  refresh() {
+    const that = this
+    wx.request({
+      url: 'https://www.szmyxdi.com/signup/getValidClasses/6',
+      method: 'GET',
+      success: function(data) {
+        console.log(data)
+        var classesItems = that.data.classesItems
+        if (data.data.code === '200') {
+          for (let i = 0; i < data.data.data.length; i++) {
+            const ele = data.data.data[i];
+            classesItems[i] = {'name': '['+ ele.currentNum + '/' + ele.maxNum + '] ' + ele.name, 'value': ele.id, 'checked': false};
+          }
+          that.setData({
+            classesItems: classesItems
+          });
+        }
+      }
+    })
+  }
 })
