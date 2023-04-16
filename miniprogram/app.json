@@ -15,5 +15,6 @@
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json",
-  "useExtendedLib": {}
+  "useExtendedLib": {},
+  "lazyCodeLoading": "requiredComponents"
 }

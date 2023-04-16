@@ -24,7 +24,8 @@
         "miniprogramNpmDistDir": "./"
       }
     ],
-    "condition": false
+    "condition": false,
+    "minified": true
   },
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
