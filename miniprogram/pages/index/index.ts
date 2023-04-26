@@ -49,6 +49,9 @@ Page({
   singup() {
     wx.navigateTo({url: '../tips/tips'})
   },
+  singupol() {
+    wx.navigateTo({url: '../tipsol/tipsol'})
+  },
   viewInfo() {
     wx.navigateTo({url: '../viewInfo/viewInfo'})
   }

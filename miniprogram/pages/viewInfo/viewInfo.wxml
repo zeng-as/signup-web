@@ -27,7 +27,7 @@
             <image class="weui-media-box__thumb" src="{{item.wxQrcode}}" show-menu-by-longpress="true" alt></image>
           </view>
           <view aria-hidden="true" id="js_p1m1_bd" class="weui-media-box__bd">
-            <text class="weui-media-box__title">{{item.name}}</text>
+            <text class="weui-media-box__title">{{item.name}}{{item.period < 0 ? '(线上)' : ''}}</text>
             <view class="weui-media-box__desc"></view>
           </view>
         </navigator>

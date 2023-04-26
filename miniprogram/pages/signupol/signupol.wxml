@@ -1,0 +1,62 @@
+<!--pages/signupol.wxml-->
+<view class="page">
+  <view class="page__bd">
+    <mp-toptips msg="{{errorMsg}}" type="error" show="{{errorMsg}}"></mp-toptips>
+    <mp-form-page title="第六届靶区勾画学习班-线上">
+      <mp-form id="form" rules="{{formRules}}" models="{{form}}">
+        <mp-cells title="报名信息">
+          <mp-cell prop="name" title="姓名" ext-class="">
+            <input bindinput="formInputChange" data-field="name" class="weui-input" placeholder="填写本人姓名" placeholder-class="weui-input__placeholder" value="{{form.name}}"/>
+          </mp-cell>
+        </mp-cells>
+        <mp-cells>
+          <mp-cell prop="organization" title="单位" ext-class="">
+            <input bindinput="formInputChange" data-field="organization" class="weui-input" placeholder="填写本人单位名称" placeholder-class="weui-input__placeholder" value="{{form.organization}}"/>
+          </mp-cell>
+        </mp-cells>
+        <mp-cells>
+          <mp-cell prop="post" title="职称" ext-class="">
+            <input bindinput="formInputChange" data-field="post" class="weui-input" placeholder="填写本人职称" placeholder-class="weui-input__placeholder" value="{{form.post}}"/>
+          </mp-cell>
+        </mp-cells>
+        <mp-cells>
+          <mp-cell prop="mobile" title="手机号码" ext-class="">
+            <input bindinput="formInputChange" data-field="mobile" class="weui-input" placeholder="填写本人手机号码"  type="number" placeholder-class="weui-input__placeholder" value="{{form.mobile}}"/>
+          </mp-cell>
+        </mp-cells>
+        <mp-cells>
+          <mp-cell prop="area" title="所在地" ext-class="">
+            <input bindinput="formInputChange" data-field="area" class="weui-input" placeholder="示例：广东省深圳市龙岗区" placeholder-class="weui-input__placeholder" value="{{form.area}}"/>
+          </mp-cell>
+        </mp-cells>      
+        <mp-cells>
+          <mp-cell prop="email" title="邮箱" ext-class="">
+            <input bindinput="formInputChange" data-field="email" class="weui-input" placeholder="填写本人邮箱" placeholder-class="weui-input__placeholder" value="{{form.email}}"/>
+          </mp-cell>
+        </mp-cells>
+        <mp-cells title="报名第几期靶区勾画学习班（每期详细内容请看放疗微达人报名招募链接）">
+          <mp-cell title="选项" ext-class="">
+          </mp-cell>
+        </mp-cells>   
+        <mp-cells>
+          <mp-checkbox-group prop="classes" multi="{{true}}" bindchange="classesChange">
+              <mp-checkbox wx:for="{{classesItems}}" wx:key="value" label="{{item.name}}" value="{{item.value}}" checked="{{item.checked}}" aria-disabled="{{item.disabled}}"></mp-checkbox>
+          </mp-checkbox-group>
+        </mp-cells>         
+        <mp-cells>
+        <mp-uploader files="{{files}}" bindfail="uploadError" bindsuccess="uploadSuccess" binddelete="delimg" select="{{selectFile}}" upload="{{uplaodFile}}" title="缴费" tips="上传缴费凭证或者规培生上传学生证/胸牌等相关证明" max-size="10485760" max-count="5" ></mp-uploader>
+        </mp-cells>
+      </mp-form>
+      <checkbox-group slot="tips" bindchange="bindAgreeChange">
+          <label class="weui-agree">
+              <checkbox class="weui-agree__checkbox-check" />
+              <text class="weui-agree__checkbox"></text>
+              <view class="weui-agree__text">阅读并同意<navigator url="/pages/protocol/protocol">《用户隐私协议》及《隐私政策》</navigator></view>
+          </label>
+      </checkbox-group>
+      <view slot="button">
+          <button class="weui-btn" type="primary" bindtap="submitForm">提交</button>
+      </view>
+    </mp-form-page>
+  </view>
+</view>

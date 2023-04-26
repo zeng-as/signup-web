@@ -5,7 +5,9 @@
     "pages/signup/signup",
     "pages/viewInfo/viewInfo",
     "pages/protocol/protocol",
-    "pages/tips/tips"
+    "pages/tips/tips",
+    "pages/signupol/signupol",
+    "pages/tipsol/tipsol"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -18,7 +18,8 @@
     </block>
   </view>
   <view class="usermotto">
-    <button type="primary" bindtap="singup">报名</button>
+    <button type="primary" bindtap="singup">报名-线下课程</button>
+    <button type="primary" bindtap="singupol">报名-线上课程</button>
     <button type="default" bindtap="viewInfo">查看报名信息</button>
   </view>
 </view>
